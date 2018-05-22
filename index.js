@@ -148,18 +148,18 @@ class MultipleTags extends Component {
     this.defaultTags = preselectedTags
       .map(item => (object ? {
         [objectKeyIdentifier]: item[objectKeyIdentifier],
-        [objectValueIdentifier]: item[objectValueIdentifier].toLowerCase(),
-      } : item.toLowerCase()));
+        [objectValueIdentifier]: item[objectValueIdentifier],
+      } : item));
     this.allTags = tags
       .map(item => (object ? {
         [objectKeyIdentifier]: item[objectKeyIdentifier],
-        [objectValueIdentifier]: item[objectValueIdentifier].toLowerCase(),
-      } : item.toLowerCase()));
+        [objectValueIdentifier]: item[objectValueIdentifier],
+      } : item));
     this.tags = tags
       .map(item => (object ? {
         [objectKeyIdentifier]: item[objectKeyIdentifier],
-        [objectValueIdentifier]: item[objectValueIdentifier].toLowerCase(),
-      } : item.toLowerCase()));
+        [objectValueIdentifier]: item[objectValueIdentifier],
+      } : item));
     this.arr = [];
 
     this.defaultTags.forEach((item) => {
@@ -178,7 +178,7 @@ class MultipleTags extends Component {
           object
             ? value[objectKeyIdentifier] !== item[objectKeyIdentifier]
             : value !== item),
-        );
+      );
     }
 
     this.setState({
@@ -198,10 +198,6 @@ class MultipleTags extends Component {
 
   setOnChangeValue() {
     this.props.onChangeItem(this.state.selectedTag);
-  }
-
-  ucwords(str) {
-    return (`${str}`).replace(/^([a-z])|\s+([a-z])/g, $1 => $1.toUpperCase());
   }
 
   scrollToFirstItem() {
@@ -234,7 +230,7 @@ class MultipleTags extends Component {
         ? value[objectValueIdentifier] !== item[objectValueIdentifier]
         : value !== item
       ),
-      );
+    );
     this.setState({
       searchFilterTag: this.arr,
       selectedTag: [item, ...selectedTag],
@@ -261,7 +257,7 @@ class MultipleTags extends Component {
   showAvailableTags() {
     const { searchHitResponse, defaultTotalRenderedTags, objectValueIdentifier, objectKeyIdentifier } = this.props;
     const { object, tags, selectedTag, previousCharacter } = this.state;
-    this.newValue = previousCharacter.toLowerCase();
+    this.newValue = previousCharacter;
     this.filteredTags = [];
 
     tags.map((item) => {
@@ -309,7 +305,7 @@ class MultipleTags extends Component {
 
     return (
       <View style={showAvailTagsViewNotFound}>
-        <Text style={notFoundStyle}>{ searchHitResponse } </Text>
+        <Text style={notFoundStyle}>{searchHitResponse} </Text>
       </View>
     );
   }
@@ -333,7 +329,7 @@ class MultipleTags extends Component {
     return (
       <View style={showAvailTagsViewNotFound}>
         <Text style={notFoundStyle}>
-          { show ? defaultInstructionOpen : defaultInstructionClosed }
+          {show ? defaultInstructionOpen : defaultInstructionClosed}
         </Text>
       </View>
     );
@@ -369,7 +365,7 @@ class MultipleTags extends Component {
             <Icon name={iconAddName} size={sizeIconTag} />
           </Text>
         }
-        <Text style={labelActiveTag}> { object ? this.ucwords(item[objectValueIdentifier]) : this.ucwords(item) }</Text>
+        <Text style={labelActiveTag}> {object ? item[objectValueIdentifier] : item}</Text>
       </TouchableOpacity>
     );
   }
@@ -383,7 +379,7 @@ class MultipleTags extends Component {
         style={eachTag}
         onPress={() => this.removeTag(item)}
       >
-        <Text> { object ? this.ucwords(item[objectValueIdentifier]) : this.ucwords(item) }</Text>
+        <Text> {object ? item[objectValueIdentifier] : item}</Text>
         <Text style={eachTagIcon} >
           <Icon name="ios-trash-outline" size={15} />
         </Text>
